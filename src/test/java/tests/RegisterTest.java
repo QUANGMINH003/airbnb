@@ -57,20 +57,14 @@ public class RegisterTest {
         String password = TestConfig.getValidPassword();
         String phone = TestConfig.getValidPhone();
         String birthday = TestConfig.getValidBirthDate();
-        ExtentTestManager.info("Nhap cac gia tri hop le vao cac truong trong form dang ky");
-        registerForm.enterName(name);
-        registerForm.enterEmail(email);
-        registerForm.enterPassword(password);
-        registerForm.enterPhone(phone);
-        registerForm.enterBirtday(birthday);
-        registerForm.openListGender();
-        registerForm.chooseGender();
-        page.waitForTimeout(1000);
 
-        ExtentTestManager.info("Submit form dang ky");
-        registerForm.submitRegisterForm();
+        ExtentTestManager.info("Nhap cac gia tri hop le vao cac truong trong form dang ky va dang ky");
+        registerForm.register(name, email, password, phone, birthday);
 
-        Assert.assertTrue(registerForm.displayMessageRegisterSuccess());
+        page.waitForTimeout(5000);
+
+        Assert.assertTrue(registerForm.isRegisterSuccess());
+
     }
 
     @Test
@@ -89,20 +83,11 @@ public class RegisterTest {
         String phone = TestConfig.getValidPhone();
         String birthday = TestConfig.getValidBirthDate();
 
-        ExtentTestManager.info("Nhap cac gia tri vao cac truong trong form dang ky");
-        registerForm.enterName(name);
-        registerForm.enterEmail(email);
-        registerForm.enterPassword(password);
-        registerForm.enterPhone(phone);
-        registerForm.enterBirtday(birthday);
-        registerForm.openListGender();
-        registerForm.chooseGender();
-        page.waitForTimeout(3000);
+        ExtentTestManager.info("Nhap cac gia tri vao cac truong trong form dang ky va dang ky");
+        registerForm.register(name, email, password, phone, birthday);
+        page.waitForTimeout(2000);
 
-        ExtentTestManager.info("Submit form dang ky");
-        registerForm.submitRegisterForm();
-
-        Assert.assertFalse(registerForm.displayMessageRegisterSuccess());
+        Assert.assertFalse(registerForm.isRegisterSuccess());
     }
 
     @Test
@@ -116,23 +101,14 @@ public class RegisterTest {
         page.waitForTimeout(2000);
 
         String name = TestConfig.getValidName();
-        String email = TestConfig.getValidEmail();
+        String email = TestConfig.getInvalidEmail();
         String password = TestConfig.getWeakPassword();
         String phone = TestConfig.getValidPhone();
         String birthday = TestConfig.getValidBirthDate();
 
         ExtentTestManager.info("Nhap cac gia tri vao cac truong trong form dang ky");
-        registerForm.enterName(name);
-        registerForm.enterEmail(email);
-        registerForm.enterPassword(password);
-        registerForm.enterPhone(phone);
-        registerForm.enterBirtday(birthday);
-        registerForm.openListGender();
-        registerForm.chooseGender();
-        page.waitForTimeout(3000);
-
-        ExtentTestManager.info("Submit form dang ky");
-        registerForm.submitRegisterForm();
+        registerForm.register(name, email, password, phone, birthday);
+        page.waitForTimeout(2000);
 
         boolean result = registerForm.isShowHighlightBorderAndErrorMessage();
         Assert.assertTrue(result, "Expected password input to show error highlight and error message");
