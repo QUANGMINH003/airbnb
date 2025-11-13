@@ -101,4 +101,16 @@ public class TestConfig {
     public static String getWeakPassword() {
         return getProperty("test.weak.password");
     }
+
+    public static String getValidMessageRegister() {
+        return getProperty("test.message.valid.register");
+    }
+
+    public static String getCheckinDate() {
+        return getProperty("test.date.checkin");
+    }
+
+    public static String getCheckoutDate() {
+        return getProperty("test.date.checkout");
+    }
 }
