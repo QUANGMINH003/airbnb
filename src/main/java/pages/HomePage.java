@@ -1,5 +1,6 @@
 package pages;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.SelectOption;
 import constants.HomepageConstants;
@@ -72,7 +73,12 @@ public class HomePage extends BasePages{
         clickElement(Add_Button);
     }
 
+    public void clickSearchByPriceRangeButton() {
+        clickElement(Button_Range_Price);
+    }
+
     public void clickSearchButton() {
+
         clickElement(HomepageConstants.SearchButton);
     }
 
@@ -85,4 +91,20 @@ public class HomePage extends BasePages{
         String currentUrl = page.url();
         return currentUrl.contains("/rooms");
     }
+
+    public boolean isFilterApplied() {
+        String currentUrl = page.url();
+        return currentUrl.contains("priceMin=500000") && currentUrl.contains("priceMax=1000000");
+    }
+
+    public boolean isPriceFilterButtonReady() {
+        Locator button = page.locator("#priceFilterButton");
+        return button.isVisible() && button.isEnabled();
+    }
+
+    public boolean isPriceFilterVisible() {
+        return page.isVisible("#priceFilterSection");
+    }
+
+
 }

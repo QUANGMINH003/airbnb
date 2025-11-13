@@ -71,7 +71,7 @@ public class UserProfileTest {
 
         Assert.assertTrue(
                 userProfileForm.isUserProfileVisible(),
-                "Trang hồ sơ người dùng KHÔNG hiển thị sau khi đăng nhập!"
+                "Trang ho so nguoi dung KHONG hien thi sau khi dang nhap!"
         );
     }
 
@@ -109,7 +109,7 @@ public class UserProfileTest {
 
         page.waitForTimeout(5000);
 
-        Assert.assertTrue(userProfileForm.isDisplayMessageSuccess());
+        Assert.assertTrue(userProfileForm.isDisplayUpdateMessageSuccess(),"Cap nhat thong tin khong thanh cong!");
     }
 
 

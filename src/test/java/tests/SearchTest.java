@@ -78,4 +78,28 @@ public class SearchTest {
         Assert.assertTrue(homePage.isSearchSuccess());
     }
 
+    @Test
+    public void tc11_SearchByPriceRange() {
+        ExtentTestManager.info("Truy cap website");
+        homePage.navigateToWebsite();
+
+        ExtentTestManager.info("Kiem tra nut mo filter khoang gia co kha dung khong");
+        Assert.assertTrue(homePage.isPriceFilterButtonReady(),
+                "Button mo filter khoang gia KHONG kha dung (an hoac disable)!");
+
+        ExtentTestManager.info("Mo Filter theo khoang gia");
+        homePage.clickSearchByPriceRangeButton();
+        page.waitForTimeout(1000);
+
+        ExtentTestManager.info("Kiem tra filter khoang gia da mo ra chua");
+        Assert.assertTrue(homePage.isPriceFilterVisible(),
+                "Click nut mo filter khoang gia NHUNG khong co phan tu filter hien thi!");
+
+        ExtentTestManager.info("Thuc hien tim kiem");
+        homePage.clickSearchButton();
+        page.waitForTimeout(5000);
+
+        Assert.assertTrue(homePage.isFilterApplied(), "Bo loc khoang gia KHONG duoc ap dung sau khi tim kiem!");
+    }
+
 }

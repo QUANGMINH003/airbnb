@@ -10,4 +10,7 @@ public class HomepageConstants {
     public static final String Date_Picker = "//div[@id='root']/div[2]//div/div[3]";
     public static final String Button_Add_Guest = "//p[contains(text(),'Thêm khách')]";
     public static final String Add_Button = "//div[contains(text(),'+')]";
+
+    public static final String Button_Range_Price = "//button[normalize-space()='Giá']";
+
 }

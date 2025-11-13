@@ -19,6 +19,7 @@ public class UserProfileForm extends BasePages {
     private static final String User_Profile_Dashboard = "//a[normalize-space()='Dashboard']";
     private static final String Edit_Profile_Button = "//button[contains(text(),'Chỉnh sửa hồ sơ')]";
     private static final String Message_Update_Success = "//span[contains(text(),'Cập nhật thông tin thành công')]";
+    private static final String Message_Update_Failed = "";
     private static final String Avatar_Profile_User = "//img[@class='mx-auto w-36 h-36 object-cover rounded-full']";
     private static final String Submit_EditProfile_Button = "//button[@class='ant-btn css-mzwlov ant-btn-primary bg-blue-500']";
     private static final String Edit_Name_Input = "//input[@id='name']";
@@ -119,13 +120,25 @@ public class UserProfileForm extends BasePages {
         submitEditProfileForm();
     }
 
-    public boolean isDisplayMessageSuccess() {
+    public boolean isDisplayUpdateMessageSuccess() {
         try {
             page.locator(Message_Update_Success)
                     .waitFor(new Locator.WaitForOptions()
                             .setState(WaitForSelectorState.VISIBLE)
                             .setTimeout(3000));
 
+            return true;
+        } catch (PlaywrightException e) {
+            return false;
+        }
+    }
+
+    public boolean isDisplayUpdateMessageFailed() {
+        try {
+            page.locator(Message_Update_Failed)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(3000));
             return true;
         } catch (PlaywrightException e) {
             return false;
