@@ -113,4 +113,24 @@ public class TestConfig {
     public static String getCheckoutDate() {
         return getProperty("test.date.checkout");
     }
+
+    public static String getEditValidName() {
+        return getProperty("test.edit.valid.name");
+    }
+
+    public static String getEditValidEmail() {
+        return getProperty("test.edit.valid.email");
+    }
+
+    public static String getEditValidPassword() {
+        return getProperty("test.edit.valid.password");
+    }
+
+    public static String getEditValidBirtday() {
+        return getProperty("test.edit.valid.birtday");
+    }
+
+    public static String getEditValidPhone() {
+        return getProperty("test.edit.valid.phone");
+    }
 }
