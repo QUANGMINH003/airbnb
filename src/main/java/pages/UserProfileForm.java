@@ -24,9 +24,7 @@ public class UserProfileForm extends BasePages {
     private static final String Submit_EditProfile_Button = "//button[@class='ant-btn css-mzwlov ant-btn-primary bg-blue-500']";
     private static final String Edit_Name_Input = "//input[@id='name']";
     private static final String Edit_Email_Input = "//input[@id='email']";
-    //chua update
-    private static final String Edit_Password_Input = "input[name='password']";
-    //
+    private static final String Edit_Profile_Form = "//div[@class='ant-modal-content']";
     private static final String Edit_Phone_Input = "//input[@id='phone']";
     private static final String Edit_Birtday_Input = "//input[@id='birthday']";
     private static final String Edit_Gender_Input = "//input[@id='gender']/parent::span";
@@ -58,14 +56,17 @@ public class UserProfileForm extends BasePages {
         }
     }
 
-    public void displayEditUserProfile() {
+    public void accessEditUserProfile() {
         clickElement(Edit_Profile_Button);
-        System.out.println("Mo form edit user profile");
+        System.out.println("Truy cap edit user profile");
     }
 
-    public void openProfilePage() {
-
+    public void displayEditUserProfile() {
+        clickElement(Edit_Profile_Form);
+        System.out.println("Hien thi form edit user profile");
     }
+
+
 
     public void enterEditName(String name) {
         fillElement(Edit_Name_Input, name);
@@ -77,11 +78,6 @@ public class UserProfileForm extends BasePages {
         System.out.println("Nhap email: " + mail);
     }
 
-    /*public void enterEditPassword(String password) {
-        fillElement(Edit_Password_Input, password);
-        System.out.println("Nhap password: " + password);
-    }*/
-
     public void enterEditPhone(String phone) {
         fillElement(Edit_Phone_Input, phone);
         System.out.println("Nhap so dien thoai: " + phone);
@@ -89,7 +85,6 @@ public class UserProfileForm extends BasePages {
 
     public void enterEditBirtday(String birtday) {
         fillElement(Edit_Birtday_Input, birtday);
-//        page.click(Birtday_Input);
         System.out.println("Nhap ngay sinh: " + birtday);
     }
 

@@ -74,7 +74,7 @@ public class HomePage extends BasePages{
     }
 
     public void clickSearchByPriceRangeButton() {
-        clickElement(Button_Range_Price);
+        clickElement(Range_Price_Button);
     }
 
     public void clickSearchButton() {
@@ -106,5 +106,22 @@ public class HomePage extends BasePages{
         return page.isVisible("#priceFilterSection");
     }
 
+    public boolean isOpenRoomDetailSuccess() {
+        String currentUrl = page.url();
+        return currentUrl.matches(".*\\/room-detail\\/\\d+");
+    }
+    public void displayListRoomsLocation() {
+        clickElement(Location_Button);
+        System.out.println("Hien thi list phong o dia diem da chon");
+    }
 
+    public boolean isListRoomLocationSuccess() {
+        String currentUrl = page.url();
+        return currentUrl.matches(".*\\/rooms\\/[a-zA-Z0-9\\-]+");
+    }
+
+    public void displayRoomsDetail() {
+        clickElement(Room_Car);
+        System.out.println("Hien thi chi tiet phong");
+    }
 }

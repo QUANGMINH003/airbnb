@@ -102,4 +102,17 @@ public class SearchTest {
         Assert.assertTrue(homePage.isFilterApplied(), "Bo loc khoang gia KHONG duoc ap dung sau khi tim kiem!");
     }
 
+    @Test
+    public void tc12_SeeRoomDetails() {
+        ExtentTestManager.info("Truy cap website");
+        homePage.navigateToWebsite();
+
+        ExtentTestManager.info("Truy cap khu vuc muon tim phong");
+        homePage.displayListRoomsLocation();
+
+        ExtentTestManager.info("Xem chi tiet phong");
+        homePage.displayRoomsDetail();
+
+        Assert.assertTrue(homePage.isOpenRoomDetailSuccess(), "Khong xem duoc chi tiet phong!");
+    }
 }
