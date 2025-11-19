@@ -124,4 +124,34 @@ public class HomePage extends BasePages{
         clickElement(Room_Car);
         System.out.println("Hien thi chi tiet phong");
     }
+
+
+    public boolean isRoomNameVisible() {
+        return page.isVisible("//h2[@class=' font-bold text-3xl pt-4']");
+    }
+
+    public boolean isRoomAddressVisible() {
+        return page.isVisible("//a[@class='underline cursor-pointer text-gray-600 hover:text-");
+    }
+
+    public boolean isRoomImageVisible() {
+        return page.isVisible("//*[@id=\"root\"]/div[2]/div[2]/div/div[1]/div[1]/div/div");
+    }
+
+    public boolean isRoomPriceVisible() {
+        return page.isVisible("//body[1]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]");
+    }
+
+    public boolean isRoomUtilitiesVisible() {
+        return page.isVisible("//div[@class='space-y-6']");
+    }
+
+    public boolean isRoomInformationVisible() {
+        return page.isVisible("//body/div[@id='root']/div[contains(@class,'py-5 space-y-5')]/div[contains(@class,'grid grid-cols-1 lg:flex gap-5')]/div[1]//p");
+    }
+
+    public boolean isRoomDescriptionVisible() {
+        return page.isVisible("//p[@class='text-justify py-3']");
+    }
+
 }

@@ -115,4 +115,25 @@ public class SearchTest {
 
         Assert.assertTrue(homePage.isOpenRoomDetailSuccess(), "Khong xem duoc chi tiet phong!");
     }
+
+    @Test
+    public void tc13_FullRoomInformationDisplay() {
+        ExtentTestManager.info("Truy cap website");
+        homePage.navigateToWebsite();
+
+        ExtentTestManager.info("Truy cap khu vuc muon tim phong");
+        homePage.displayListRoomsLocation();
+
+        ExtentTestManager.info("Xem chi tiet phong");
+        homePage.displayRoomsDetail();
+
+        Assert.assertTrue(homePage.isOpenRoomDetailSuccess(), "Khong xem duoc chi tiet phong!");
+        Assert.assertTrue(homePage.isRoomNameVisible(), "Khong hien thi ten phong!");
+        Assert.assertTrue(homePage.isRoomAddressVisible(), "Khong hien thi dia chi phong!");
+        Assert.assertTrue(homePage.isRoomImageVisible(), "Khong hien thi hinh anh phong!");
+        Assert.assertTrue(homePage.isRoomPriceVisible(), "Khong hien thi gia phong!");
+        Assert.assertTrue(homePage.isRoomUtilitiesVisible(), "Khong hien thi tien ich phong!");
+        Assert.assertTrue(homePage.isRoomInformationVisible(), "Khong hien thi thong tin tom tat phong!");
+        Assert.assertTrue(homePage.isRoomDescriptionVisible(), "Khong hien thi mo ta phong!");
+    }
 }
