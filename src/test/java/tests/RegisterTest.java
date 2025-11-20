@@ -110,7 +110,30 @@ public class RegisterTest {
         registerForm.register(name, email, password, phone, birthday);
         page.waitForTimeout(2000);
 
-        boolean result = registerForm.isShowHighlightBorderAndErrorMessage();
-        Assert.assertTrue(result, "Expected password input to show error highlight and error message");
+        boolean result = registerForm.isShowErrorMessage();
+        Assert.assertTrue(result, "Expected password input to show error message");
+    }
+
+    @Test
+    public void tcExtra_TestRegisterWithInvalidEmail() {
+        ExtentTestManager.info("Mo dropdown user");
+        registerForm.openUserDropdown();
+        page.waitForTimeout(2000);
+
+        ExtentTestManager.info("Mo form dang ky");
+        registerForm.displayRegisterForm();
+        page.waitForTimeout(1000);
+
+        String name = TestConfig.getValidName();
+        String email = TestConfig.getInvaliFormatEmail();
+        String password = TestConfig.getInvalidEmail();
+        String phone = TestConfig.getValidPhone();
+        String birthday = TestConfig.getValidBirthDate();
+
+        ExtentTestManager.info("Nhap thong tin va dang ky");
+        registerForm.register(name, email, password, phone, birthday);
+        page.waitForTimeout(2000);
+
+        Assert.assertTrue(registerForm.isDisplayMessageInvalidEmail());
     }
 }

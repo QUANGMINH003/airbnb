@@ -7,15 +7,9 @@ import com.microsoft.playwright.options.WaitForSelectorState;
 import constants.UrlConstants;
 import utils.TestConfig;
 
-public class LoginForm extends BasePages{
-    private static final String Email_Input = "input[name='email']";
-    private static final String Password_Input = "input[name='password']";
-    private static final String Submit_Button = "//button[@type='submit' and contains(text(), 'Đăng nhập')]";
-    private static final String Message_Login_Success = "//button[@id='user-menu-button']";
-    private static final String Login_Button = "//div[@id='root']//div/div//li//button[contains(text(), 'Đăng nhập')]";
-    private static final String User_Button = "//div[@id='user-dropdown']/following-sibling::button[1]";
-    private static final String Logout_Button = "//div[@id='user-dropdown']//ul[1]/li[4]/button";
+import static constants.LoginFormConstants.*;
 
+public class LoginForm extends BasePages{
     public LoginForm(Page page) {super(page);}
 
     public void openUserDropdown() {

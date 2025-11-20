@@ -5,23 +5,10 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.PlaywrightException;
 import com.microsoft.playwright.options.WaitForSelectorState;
 import utils.TestConfig;
+import static constants.RegisterConstants.*;
+
 
 public class RegisterForm extends BasePages{
-    private static final String Name_Input = "input[name='name']";
-    private static final String Email_Input = "input[name='email']";
-    private static final String Password_Input = "input[name='password']";
-    private static final String Phone_Input = "input[name='phone']";
-    private static final String Birtday_Input = "input[name='birthday']";
-    private static final String Gender_Input = "//input[@id='gender']/parent::span";
-    private static final String Male_Option = "//div[@title='Nam']";
-    private static final String User_Button = "//div[@id='user-dropdown']/following-sibling::button[1]";
-    private static final String Register_Button = "//div[@id='root']//div/div//li//button[contains(text(), 'Đăng ký')]";
-    private static final String Submit_Register_Button = "//button[@type='submit' and normalize-space()='Đăng ký']";
-    private static final String Check_Register_Success = "//button[@type='submit' and contains(text(), 'Đăng nhập')]";
-    private static final String Message_Register_Success = "//span[contains(text(), 'Đăng ký thành công')]";
-    private static final String Message_Register_Fail = "//div[contains(@class, 'modal') or contains(@class, 'popup')]//*[contains(text(), 'lỗi') or contains(text(), 'error')]";
-    private static final String Message_Register_Fail_WeakPassword = "//span[contains(text(),'Mật khẩu không đủ mạnh')]";
-
     public RegisterForm(Page page) {
         super(page);
     }
@@ -118,16 +105,25 @@ public class RegisterForm extends BasePages{
         }
     }
 
-    public boolean isShowHighlightBorderAndErrorMessage() {
-        Locator errorMessage = page.locator("div:has-text('Password')").first();
-        errorMessage.waitFor(new Locator.WaitForOptions().setTimeout(3000).setState(WaitForSelectorState.ATTACHED));
 
-        boolean isErrorVisible = false;
-        if (errorMessage.count() > 0) {
-            isErrorVisible = errorMessage.isVisible();
+    public boolean isShowErrorMessage() {
+        Locator errorMessage = page.locator("div:has-text('Mật khẩu')").first();
+
+        return errorMessage.isVisible(
+                new Locator.IsVisibleOptions().setTimeout(0)
+        );
+    }
+
+    public boolean isDisplayMessageInvalidEmail() {
+        try{
+            page.locator(Message_Invalid_Email)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(2000));
+            return true;
+        }catch (PlaywrightException e) {
+            return false;
         }
-
-        return isErrorVisible;
     }
 
 }
