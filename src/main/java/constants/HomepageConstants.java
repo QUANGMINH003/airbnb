@@ -3,6 +3,8 @@ package constants;
 import java.time.format.DateTimeFormatter;
 
 public class HomepageConstants {
+    public static final String PlaceCard = "//h2[contains(text(),'Hồ Chí Minh')]/ancestor::a";
+
     public static final String YEAR_SELECT = "//span[contains(@class, 'rdrMonthPicker')]/following-sibling::span[2]/select";
     public static final String MONTH_SELECT = "//span[contains(@class, 'rdrMonthPicker')]/select";
     public static final String CALENDAR_DAY = "//button[contains(@class, 'rdrDay') and not(contains(@class, 'rdrDayPassive')) and .//span[text()='%s']]";

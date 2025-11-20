@@ -11,8 +11,6 @@ import java.time.LocalDate;
 import static constants.HomepageConstants.*;
 
 public class HomePage extends BasePages{
-    private static final String PlaceCard = "//h2[contains(text(),'Hồ Chí Minh')]/ancestor::a";
-
     public HomePage (Page page) {
         super(page);
     }
