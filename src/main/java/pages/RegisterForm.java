@@ -105,16 +105,13 @@ public class RegisterForm extends BasePages{
         }
     }
 
+
     public boolean isShowErrorMessage() {
         Locator errorMessage = page.locator("div:has-text('Mật khẩu')").first();
-        errorMessage.waitFor(new Locator.WaitForOptions().setTimeout(3000).setState(WaitForSelectorState.ATTACHED));
 
-        boolean isErrorVisible = false;
-        if (errorMessage.count() > 0) {
-            isErrorVisible = errorMessage.isVisible();
-        }
-
-        return isErrorVisible;
+        return errorMessage.isVisible(
+                new Locator.IsVisibleOptions().setTimeout(0)
+        );
     }
 
     public boolean isDisplayMessageInvalidEmail() {
