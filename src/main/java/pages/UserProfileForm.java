@@ -13,22 +13,14 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.PlaywrightException;
 import com.microsoft.playwright.options.WaitForSelectorState;
 
+
+import java.io.File;
+import java.nio.file.Paths;
+import java.util.Random;
+
+import static constants.UserProfileConstants.*;
+
 public class UserProfileForm extends BasePages {
-    // ===================== SELECTORS =====================
-    private static final String User_Profile_Button = "//button[@id='user-menu-button']";
-    private static final String User_Profile_Dashboard = "//a[normalize-space()='Dashboard']";
-    private static final String Edit_Profile_Button = "//button[contains(text(),'Chỉnh sửa hồ sơ')]";
-    private static final String Message_Update_Success = "//span[contains(text(),'Cập nhật thông tin thành công')]";
-    private static final String Message_Update_Failed = "";
-    private static final String Avatar_Profile_User = "//img[@class='mx-auto w-36 h-36 object-cover rounded-full']";
-    private static final String Submit_EditProfile_Button = "//button[@class='ant-btn css-mzwlov ant-btn-primary bg-blue-500']";
-    private static final String Edit_Name_Input = "//input[@id='name']";
-    private static final String Edit_Email_Input = "//input[@id='email']";
-    private static final String Edit_Profile_Form = "//div[@class='ant-modal-content']";
-    private static final String Edit_Phone_Input = "//input[@id='phone']";
-    private static final String Edit_Birtday_Input = "//input[@id='birthday']";
-    private static final String Edit_Gender_Input = "//input[@id='gender']/parent::span";
-    private static final String Edit_Male_Option = "//div[@title='Nữ']";
 
     public UserProfileForm(Page page) {
         super(page);
@@ -139,6 +131,50 @@ public class UserProfileForm extends BasePages {
             return false;
         }
     }
+
+    public void uploadAvatar(String filePath) {
+        page.locator("input[type='file']").setInputFiles(Paths.get(filePath));
+    }
+
+    public void clickUploadAvatarButton() {
+        clickElement(BUTTON_UPLOAD);
+    }
+
+    public boolean isUploadSuccess() {
+        try {
+            page.locator(MESSAGE_UPLOAD_SUCCESS)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setTimeout(3000)
+                            .setState(WaitForSelectorState.VISIBLE));
+
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void openFormUploadImage() {
+        clickElement(BUTTON_OPEN_UPLOAD);
+        System.out.println("Mo form upload hinh anh");
+    }
+
+    public static String getRandomJpg(String directoryPath) {
+        File folder = new File(directoryPath);
+
+        File[] jpgFiles = folder.listFiles((dir, name) ->
+                name.toLowerCase().endsWith(".jpg")
+        );
+
+        if (jpgFiles == null || jpgFiles.length == 0) {
+            throw new RuntimeException("Không tìm thấy file JPG trong thư mục: " + directoryPath);
+        }
+
+        Random random = new Random();
+        File randomFile = jpgFiles[random.nextInt(jpgFiles.length)];
+
+        return randomFile.getAbsolutePath();
+    }
+
 
 }
 

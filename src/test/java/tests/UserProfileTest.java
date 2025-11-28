@@ -10,7 +10,10 @@ import pages.LoginForm;
 import pages.RegisterForm;
 import pages.UserProfileForm;
 import utils.ExtentTestManager;
+import utils.RandomFileUtils;
 import utils.TestConfig;
+
+import static pages.UserProfileForm.getRandomJpg;
 
 @Listeners(ExtentTestNGListener.class)
 public class UserProfileTest {
@@ -116,7 +119,45 @@ public class UserProfileTest {
         Assert.assertTrue(userProfileForm.isDisplayUpdateMessageSuccess(),"Cap nhat thong tin khong thanh cong!");
     }
 
+    @Test
+    public void tcUploadAvatar() {
+        // Folder ảnh thật trong máy bạn
+        String imageFolder = "E:\\";
 
+        // Lấy file JPG ngẫu nhiên
+        String randomAvatar = RandomFileUtils.getRandomJpg(imageFolder);
 
+        ExtentTestManager.info("Mo dropdown user");
+        loginForm.openUserDropdown();
+        page.waitForTimeout(1000);
+
+        ExtentTestManager.info("Mo form dang nhap");
+        loginForm.displayLoginForm();
+        page.waitForTimeout(1000);
+
+        String email = TestConfig.getValidEmail();
+        String password = TestConfig.getValidPassword();
+        ExtentTestManager.info("Nhap thong tin dang nhap va dang nhap");
+        loginForm.login(email, password);
+        page.waitForTimeout(1000);
+
+        ExtentTestManager.info("Mo dropdown user profile");
+        userProfileForm.openUserProfileDropdown();
+        page.waitForTimeout(1000);
+
+        ExtentTestManager.info("Mo Form Upload hinh anh");
+        userProfileForm.openFormUploadImage();
+        page.waitForTimeout(1000);
+
+        ExtentTestManager.info("Upload file");
+        userProfileForm.uploadAvatar(randomAvatar);
+        page.waitForTimeout(1000);
+
+        ExtentTestManager.info("Click upload");
+        userProfileForm.clickUploadAvatarButton();
+        page.waitForTimeout(1000);
+
+        Assert.assertTrue(userProfileForm.isUploadSuccess(), "Upload avatar thất bại!");
+    }
 
 }
