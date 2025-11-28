@@ -13,7 +13,6 @@ import utils.ExtentTestManager;
 import utils.RandomFileUtils;
 import utils.TestConfig;
 
-import static pages.UserProfileForm.getRandomJpg;
 
 @Listeners(ExtentTestNGListener.class)
 public class UserProfileTest {
@@ -122,7 +121,7 @@ public class UserProfileTest {
     @Test
     public void tcUploadAvatar() {
         // Folder ảnh thật trong máy bạn
-        String imageFolder = "E:\\";
+        String imageFolder = "D:\\";
 
         // Lấy file JPG ngẫu nhiên
         String randomAvatar = RandomFileUtils.getRandomJpg(imageFolder);
