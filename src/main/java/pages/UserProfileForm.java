@@ -27,11 +27,12 @@ public class UserProfileForm extends BasePages {
     }
 
     public void openUserProfileDropdown() {
+        page.waitForLoadState();
         clickElement(User_Profile_Button);
         System.out.println("Mo dropdown user profile");
     }
 
-    public void displayUserProfile() {
+    public void clickDashboardUserProfile() {
         clickElement(User_Profile_Dashboard);
         System.out.println("Mo form user profile");
     }

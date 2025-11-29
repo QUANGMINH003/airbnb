@@ -7,7 +7,6 @@ import com.microsoft.playwright.Playwright;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.LoginForm;
-import pages.RegisterForm;
 import pages.UserProfileForm;
 import utils.ExtentTestManager;
 import utils.RandomFileUtils;
@@ -22,7 +21,6 @@ public class UserProfileTest {
     private Page page;
     private LoginForm loginForm;
     private UserProfileForm userProfileForm;
-    private RegisterForm registerForm;
 
     @BeforeClass
     public void setupClass() {
@@ -35,6 +33,8 @@ public class UserProfileTest {
         browserContext = browser.newContext(TestConfig.getNewContextOptions());
         page = browserContext.newPage();
         loginForm = new LoginForm(page);
+        userProfileForm = new UserProfileForm(page);
+
     }
 
     @AfterClass
@@ -65,6 +65,10 @@ public class UserProfileTest {
 
         ExtentTestManager.info("Mo dropdown user profile");
         userProfileForm.openUserProfileDropdown();
+        page.waitForTimeout(1000);
+
+        ExtentTestManager.info("Click mo dashboard");
+        userProfileForm.clickDashboardUserProfile();
         page.waitForTimeout(1000);
 
         ExtentTestManager.info("Truy cap user profile");
@@ -101,6 +105,10 @@ public class UserProfileTest {
         userProfileForm.openUserProfileDropdown();
         page.waitForTimeout(1000);
 
+        ExtentTestManager.info("Click mo dashboard");
+        userProfileForm.clickDashboardUserProfile();
+        page.waitForTimeout(1000);
+
         ExtentTestManager.info("Hien thi user profile");
         userProfileForm.displayEditUserProfile();
         page.waitForTimeout(1000);
@@ -121,7 +129,7 @@ public class UserProfileTest {
     @Test
     public void tcUploadAvatar() {
         // Folder ảnh thật trong máy bạn
-        String imageFolder = "D:\\";
+        String imageFolder = "E:\\";
 
         // Lấy file JPG ngẫu nhiên
         String randomAvatar = RandomFileUtils.getRandomJpg(imageFolder);
@@ -142,6 +150,10 @@ public class UserProfileTest {
 
         ExtentTestManager.info("Mo dropdown user profile");
         userProfileForm.openUserProfileDropdown();
+        page.waitForTimeout(1000);
+
+        ExtentTestManager.info("Click mo dashboard");
+        userProfileForm.clickDashboardUserProfile();
         page.waitForTimeout(1000);
 
         ExtentTestManager.info("Mo Form Upload hinh anh");

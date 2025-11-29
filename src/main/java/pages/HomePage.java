@@ -129,7 +129,8 @@ public class HomePage extends BasePages{
     }
 
     public boolean isRoomAddressVisible() {
-        return page.isVisible("//a[@class='underline cursor-pointer text-gray-600 hover:text-");
+        return page.isVisible("//div[@class='flex gap-x-5']//a");
+
     }
 
     public boolean isRoomImageVisible() {

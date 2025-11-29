@@ -82,10 +82,12 @@ public class SearchTest {
     public void tc11_SearchByPriceRange() {
         ExtentTestManager.info("Truy cap website");
         homePage.navigateToWebsite();
+        page.waitForTimeout(1000);
 
         ExtentTestManager.info("Kiem tra nut mo filter khoang gia co kha dung khong");
         Assert.assertTrue(homePage.isPriceFilterButtonReady(),
                 "Button mo filter khoang gia KHONG kha dung (an hoac disable)!");
+        page.waitForTimeout(1000);
 
         ExtentTestManager.info("Mo Filter theo khoang gia");
         homePage.clickSearchByPriceRangeButton();
@@ -94,6 +96,7 @@ public class SearchTest {
         ExtentTestManager.info("Kiem tra filter khoang gia da mo ra chua");
         Assert.assertTrue(homePage.isPriceFilterVisible(),
                 "Click nut mo filter khoang gia NHUNG khong co phan tu filter hien thi!");
+        page.waitForTimeout(1000);
 
         ExtentTestManager.info("Thuc hien tim kiem");
         homePage.clickSearchButton();
@@ -106,12 +109,15 @@ public class SearchTest {
     public void tc12_SeeRoomDetails() {
         ExtentTestManager.info("Truy cap website");
         homePage.navigateToWebsite();
+        page.waitForTimeout(1000);
 
         ExtentTestManager.info("Truy cap khu vuc muon tim phong");
         homePage.displayListRoomsLocation();
+        page.waitForTimeout(1000);
 
         ExtentTestManager.info("Xem chi tiet phong");
         homePage.displayRoomsDetail();
+        page.waitForTimeout(1000);
 
         Assert.assertTrue(homePage.isOpenRoomDetailSuccess(), "Khong xem duoc chi tiet phong!");
     }
@@ -120,12 +126,15 @@ public class SearchTest {
     public void tc13_FullRoomInformationDisplay() {
         ExtentTestManager.info("Truy cap website");
         homePage.navigateToWebsite();
+        page.waitForTimeout(1000);
 
         ExtentTestManager.info("Truy cap khu vuc muon tim phong");
         homePage.displayListRoomsLocation();
+        page.waitForTimeout(1000);
 
         ExtentTestManager.info("Xem chi tiet phong");
         homePage.displayRoomsDetail();
+        page.waitForTimeout(1000);
 
         Assert.assertTrue(homePage.isOpenRoomDetailSuccess(), "Khong xem duoc chi tiet phong!");
         Assert.assertTrue(homePage.isRoomNameVisible(), "Khong hien thi ten phong!");
