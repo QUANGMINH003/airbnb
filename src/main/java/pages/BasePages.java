@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 
 public class BasePages {
     protected final Page page;
-    protected final String baseUrl = "https://demo4.cybersoft.edu.vn/";
+    protected final String baseUrl = "https://demo5.cybersoft.edu.vn/";
     public BasePages(Page page) {
         this.page = page;
     }
