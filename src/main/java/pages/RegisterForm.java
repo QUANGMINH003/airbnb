@@ -48,6 +48,7 @@ public class RegisterForm extends BasePages{
     }
 
     public void enterBirtday(String birtday) {
+        clickElement(Birtday_Input);
         fillElement(Birtday_Input, birtday);
 //        page.click(Birtday_Input);
         System.out.println("B7: Nhap ngay sinh: " + birtday);

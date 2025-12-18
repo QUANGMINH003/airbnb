@@ -133,4 +133,8 @@ public class TestConfig {
     public static String getEditValidPhone() {
         return getProperty("test.edit.valid.phone");
     }
+
+    public static String getRegisterValidEmail() {
+        return getProperty("test.registervalid.email");
+    }
 }

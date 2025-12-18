@@ -53,7 +53,7 @@ public class RegisterTest {
         page.waitForTimeout(1000);
 
         String name = TestConfig.getValidName();
-        String email = TestConfig.getValidEmail();
+        String email = TestConfig.getRegisterValidEmail();
         String password = TestConfig.getValidPassword();
         String phone = TestConfig.getValidPhone();
         String birthday = TestConfig.getValidBirthDate();
@@ -78,7 +78,7 @@ public class RegisterTest {
         page.waitForTimeout(2000);
 
         String name = TestConfig.getValidName();
-        String email = TestConfig.getValidEmail();
+        String email = TestConfig.getRegisterValidEmail();
         String password = TestConfig.getValidPassword();
         String phone = TestConfig.getValidPhone();
         String birthday = TestConfig.getValidBirthDate();
