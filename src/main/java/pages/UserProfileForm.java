@@ -18,6 +18,7 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.Random;
 
+import static constants.RegisterConstants.Birtday_Input;
 import static constants.UserProfileConstants.*;
 
 public class UserProfileForm extends BasePages {
@@ -66,19 +67,18 @@ public class UserProfileForm extends BasePages {
         System.out.println("Nhap ho ten: " + name);
     }
 
-    public void enterEditEmail(String mail) {
-        fillElement(Edit_Email_Input, mail);
-        System.out.println("Nhap email: " + mail);
-    }
 
     public void enterEditPhone(String phone) {
         fillElement(Edit_Phone_Input, phone);
         System.out.println("Nhap so dien thoai: " + phone);
     }
 
-    public void enterEditBirtday(String birtday) {
-        fillElement(Edit_Birtday_Input, birtday);
-        System.out.println("Nhap ngay sinh: " + birtday);
+    public void enterEditBirthday(String birthday) {
+        clickElement(Edit_Birthday_Input);
+        fillElement(Edit_Birthday_Input, birthday);
+        page.keyboard().press("Enter");
+        page.click("body");
+        System.out.println("Nhap ngay sinh: " + birthday);
     }
 
     public void openEditListGender() {
@@ -91,18 +91,33 @@ public class UserProfileForm extends BasePages {
         System.out.println("Chon gioi tinh Nu");
     }
 
-    public void submitEditProfileForm() {
+    /*public void submitEditProfileForm() {
         clickElement(Submit_EditProfile_Button);
         page.waitForLoadState();
-        page.waitForTimeout(5000);
+        page.waitForTimeout(4000);
+        System.out.println("Nhan nut Cap nhat");
+    }*/
+
+    public void submitEditProfileForm() {
+        clickElement(Submit_EditProfile_Button);
+
+        // ⏳ Đợi nút Save kết thúc loading (Ant Design)
+        page.waitForSelector(
+                ".ant-btn-loading",
+                new Page.WaitForSelectorOptions()
+                        .setState(WaitForSelectorState.DETACHED)
+                        .setTimeout(10000)
+        );
+
         System.out.println("Nhan nut Cap nhat");
     }
 
-    public void editinfor(String name, String mail, String phone, String birtday) {
+
+    public void editinfor( String name, String phone, String birthday) {
+
         enterEditName(name);
-        enterEditEmail(mail);
         enterEditPhone(phone);
-        enterEditBirtday(birtday);
+        enterEditBirthday(birthday);
         openEditListGender();
         chooseEditGender();
         submitEditProfileForm();

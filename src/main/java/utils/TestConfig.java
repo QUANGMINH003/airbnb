@@ -122,12 +122,8 @@ public class TestConfig {
         return getProperty("test.edit.valid.email");
     }
 
-    public static String getEditValidPassword() {
-        return getProperty("test.edit.valid.password");
-    }
-
-    public static String getEditValidBirtday() {
-        return getProperty("test.edit.valid.birtday");
+    public static String getEditValidBirthday() {
+        return getProperty("test.edit.valid.birthday");
     }
 
     public static String getEditValidPhone() {

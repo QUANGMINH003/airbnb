@@ -1,5 +1,6 @@
 package pages;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
 import java.nio.file.Files;
@@ -21,9 +22,28 @@ public class BasePages {
         page.waitForTimeout(1000);
     }
 
-    public void fillElement(String selectors, String inputValue) {
+   /* public void fillElement(String selectors, String inputValue) {
         page.waitForSelector(selectors);
         page.fill(selectors, inputValue);
         page.waitForTimeout(1000);
+    }*/
+    public void fillElement(String selectors, String inputValue) {
+        page.waitForSelector(selectors);
+
+        page.evaluate(
+                "(selector) => {" +
+                        "  const el = document.querySelector(selector);" +
+                        "  if (el && el.hasAttribute('readonly')) {" +
+                        "    el.removeAttribute('readonly');" +
+                        "  }" +
+                        "}",
+                selectors.replace("css=", "").replace("xpath=", "")
+        );
+
+        page.fill(selectors, inputValue);
+        page.waitForTimeout(1000);
     }
+
+
+
 }

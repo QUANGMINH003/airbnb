@@ -119,7 +119,7 @@ public class HomePage extends BasePages{
     }
 
     public void displayRoomsDetail() {
-        clickElement(Room_Car);
+        clickElement(Room_Card);
         System.out.println("Hien thi chi tiet phong");
     }
 

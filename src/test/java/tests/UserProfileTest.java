@@ -111,17 +111,14 @@ public class UserProfileTest {
 
         ExtentTestManager.info("Hien thi user profile");
         userProfileForm.displayEditUserProfile();
-        page.waitForTimeout(1000);
+        page.waitForTimeout(2000);
 
         String name = TestConfig.getEditValidName();
-        String mail = TestConfig.getEditValidEmail();
         String phone = TestConfig.getEditValidPhone();
-        String birthday = TestConfig.getValidBirthDate();
+        String birthday = TestConfig.getEditValidBirthday();
 
         ExtentTestManager.info("Nhap cac gia tri hop le vao cac truong trong form edit profile");
-        userProfileForm.editinfor(name, mail, phone, birthday);
-
-        page.waitForTimeout(5000);
+        userProfileForm.editinfor(name, phone, birthday);
 
         Assert.assertTrue(userProfileForm.isDisplayUpdateMessageSuccess(),"Cap nhat thong tin khong thanh cong!");
     }
