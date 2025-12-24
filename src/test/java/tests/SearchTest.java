@@ -145,4 +145,14 @@ public class SearchTest {
         Assert.assertTrue(homePage.isRoomInformationVisible(), "Khong hien thi thong tin tom tat phong!");
         Assert.assertTrue(homePage.isRoomDescriptionVisible(), "Khong hien thi mo ta phong!");
     }
+
+    @Test
+    public void tc_SearchbyDayCheckinInThePast() {
+        ExtentTestManager.info("Truy cap website");
+        homePage.navigateToWebsite();
+        ExtentTestManager.info("Mo table chon ngay checkin va checkout");
+        homePage.clickDatePicker();
+        ExtentTestManager.info("Chon ngay checkin va checkout");
+        homePage.chooseDateBooking(TestConfig.getCheckinDateinThePast(), TestConfig.getCheckoutDate());
+    }
 }

@@ -39,5 +39,4 @@ build/
 .DS_Store
 
 #ignore videos and reports
-reports/
 videos/

@@ -153,4 +153,5 @@ public class HomePage extends BasePages{
         return page.isVisible("//p[@class='text-justify py-3']");
     }
 
+
 }
