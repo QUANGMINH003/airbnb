@@ -4,6 +4,7 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
+import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.BookingFlowPage;
 import pages.HomePage;
@@ -83,7 +84,8 @@ public class BookingFlowTest {
 
         ExtentTestManager.info("Thực hiện kiem tra thong bao thanh cong");
         bookingFlowPage.checkNotification();
-
+        // thong bao
+        Assert.assertTrue(bookingFlowPage.ischeckNotification());
     }
 
     //- TC17: Validate tính toán giá chính xác
@@ -106,8 +108,10 @@ public class BookingFlowTest {
         ExtentTestManager.info("Thực hiện đặt phòng");
         bookingFlowPage.LinkRoom();
 
-        bookingFlowPage.validateDynamicPriceCalculation();
+        Assert.assertTrue(bookingFlowPage.isDynamicPriceCalculationCorrect(),
+                "LỖI: Giá tiền trên UI không khớp với công thức tính toán!");
 
+        System.out.println("PASS: Tính toán tự động chính xác.");
     }
 
     //- TC18: Đặt phòng thất bại - Chưa đăng nhập
@@ -133,6 +137,8 @@ public class BookingFlowTest {
 
         ExtentTestManager.info("Kiem tra thong bao yeu cau dang nhap");
         bookingFlowPage.checkLoginRequiredNotification();
+
+        Assert.assertTrue(bookingFlowPage.ischeckLoginRequiredNotification());
     }
 
     //- TC19: Đặt phòng thất bại - Ngày không hợp lệ
@@ -158,8 +164,8 @@ public class BookingFlowTest {
         ExtentTestManager.info("Mo table chon ngay checkin va checkout");
         homePage.clickDatePicker();
 
-        ExtentTestManager.info("Kiem tra xem ngày trong qua khu co cho phep chon k");
-        bookingFlowPage.PastDate();
+        ExtentTestManager.info("Kiem tra xem ngày trong qua khu co bi khoa hay khong");
+        Assert.assertTrue(bookingFlowPage.isPastDateDisabled(), "LỖI: Ngày quá khứ vẫn có thể chọn được!");
     }
 
     //- TC20: Xem lịch sử đặt phòng
@@ -186,8 +192,10 @@ public class BookingFlowTest {
         ExtentTestManager.info("Click mo dashboard");
         userProfileForm.clickDashboardUserProfile();
         page.waitForTimeout(3000);
-        // kiem tra
+     
         ExtentTestManager.info("Tim Room card có thu tu dau tien trong danh sach");
         bookingFlowPage.CheckRoomCard();
+
+        Assert.assertTrue(bookingFlowPage.isCheckRoomCard());
     }
 }

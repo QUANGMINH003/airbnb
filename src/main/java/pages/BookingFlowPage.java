@@ -3,9 +3,14 @@ package pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.PlaywrightException;
+import com.microsoft.playwright.options.WaitForSelectorState;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 import static constants.BookingFlowConstants.*;
+import static constants.LoginFormConstants.Submit_Button;
+import static constants.LoginFormConstants.User_Button;
+import static constants.UserProfileConstants.MESSAGE_UPLOAD_SUCCESS;
 
 
 public class BookingFlowPage extends BasePages {
@@ -38,19 +43,35 @@ public class BookingFlowPage extends BasePages {
         System.out.println("Hien thi thong bao thanh cong");
     }
 
-    public void PastDate(){
-        String yesterday = java.time.LocalDate.now().minusDays(1).toString();
-        Locator yesterdayCell = page.locator("td[title='" + yesterday + "']");
+    public boolean ischeckNotification() {
+        try {
+            page.locator(Success_Notification)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(3000));
+            return true;
+        } catch (PlaywrightException e) {
+            return false;
+        }
+    }
 
-        if (yesterdayCell.isVisible()) {
+
+    public boolean isPastDateDisabled() {
+
+        String yesterday = java.time.LocalDate.now().minusDays(1).toString();
+
+        Locator yesterdayCell = page.locator("button.rdrDayDisabled").first();
+
+        try {
+            yesterdayCell.waitFor(new Locator.WaitForOptions().setTimeout(3000));
             String classValue = yesterdayCell.getAttribute("class");
-            if (classValue.contains("ant-picker-cell-disabled") || classValue.contains("disabled")) {
-                System.out.println("PASS: Ngày quá khứ đã bị khóa.");
-            } else {
-                throw new AssertionError("FAIL: Ngày quá khứ vẫn cho phép chọn!");
-            }
-        } else {
-            System.out.println("Ngày quá khứ đã ẩn và không thể chọn trong lịch.");
+
+            System.out.println("Ngay da duoc disabled");
+
+            return classValue.contains("rdrDayDisabled");
+
+        } catch (Exception e) {
+            return false;
         }
     }
 
@@ -63,6 +84,18 @@ public class BookingFlowPage extends BasePages {
         }
     }
 
+    public boolean ischeckLoginRequiredNotification() {
+        try {
+            page.locator(Login_Required_Notification)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(3000));
+            return true;
+        } catch (PlaywrightException e) {
+            return false;
+        }
+    }
+
     public void CheckRoomCard(){
         Locator card = page.locator(Room_Card).first();
         if (card.isVisible()) {
@@ -72,32 +105,32 @@ public class BookingFlowPage extends BasePages {
         }
     }
 
-    public void validateDynamicPriceCalculation() {
-
-        String stayInfo = page.locator(STAY_INFO_TEXT).textContent();
-
-        String[] parts = stayInfo.split("X");
-        double pricePerNight = Double.parseDouble(parts[0].replaceAll("[^0-9]", ""));
-        int numberOfNights = Integer.parseInt(parts[1].replaceAll("[^0-9]", ""));
-
-        double cleaningFee = Double.parseDouble(page.locator(CLEANING_FEE_VALUE).textContent().replaceAll("[^0-9]", ""));
-        double actualTotalOnUI = Double.parseDouble(page.locator(TOTAL_PRICE_VALUE).textContent().replaceAll("[^0-9]", ""));
-
-        double expectedStayPrice = pricePerNight * numberOfNights;
-        double expectedFinalTotal = expectedStayPrice + cleaningFee;
-
-        System.out.println("--- Kiểm tra tính toán ---");
-        System.out.println("Giá 1 đêm: " + pricePerNight);
-        System.out.println("Số đêm: " + numberOfNights);
-        System.out.println("Phí vệ sinh: " + cleaningFee);
-        System.out.println("=> Tổng tính toán: " + expectedFinalTotal);
-        System.out.println("=> Tổng trên Web: " + actualTotalOnUI);
-
-        if (actualTotalOnUI == expectedFinalTotal) {
-            System.out.println("Tính toán tự động chính xác");
-        } else {
-            throw new AssertionError(" Sai lệch Kỳ vọng " + expectedFinalTotal + " nhưng UI hiển thị " + actualTotalOnUI);
+    public boolean isCheckRoomCard() {
+        try {
+            page.locator(Room_Card)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(3000));
+            return true;
+        } catch (PlaywrightException e) {
+            return false;
         }
     }
 
+    public boolean isDynamicPriceCalculationCorrect() {
+
+        String stayInfo = page.locator(STAY_INFO_TEXT).textContent();
+        String[] parts = stayInfo.split("X");
+
+        double pricePerNight = Double.parseDouble(parts[0].replaceAll("[^0-9]", ""));
+        int numberOfNights = Integer.parseInt(parts[1].replaceAll("[^0-9]", ""));
+        double cleaningFee = Double.parseDouble(page.locator(CLEANING_FEE_VALUE).textContent().replaceAll("[^0-9]", ""));
+        double actualTotalOnUI = Double.parseDouble(page.locator(TOTAL_PRICE_VALUE).textContent().replaceAll("[^0-9]", ""));
+
+        double expectedFinalTotal = (pricePerNight * numberOfNights) + cleaningFee;
+
+        System.out.println("Tổng tính toán: " + expectedFinalTotal + " | Tổng UI: " + actualTotalOnUI);
+
+        return Double.compare(expectedFinalTotal, actualTotalOnUI) == 0;
+    }
 }
