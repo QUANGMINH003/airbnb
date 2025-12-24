@@ -133,4 +133,8 @@ public class TestConfig {
     public static String getRegisterValidEmail() {
         return getProperty("test.registervalid.email");
     }
+
+    public static String getCheckinDateinThePast() {
+        return getProperty("test.config.checkin.in.the.past");
+    }
 }
