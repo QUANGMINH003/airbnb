@@ -192,10 +192,12 @@ public class BookingFlowTest {
         ExtentTestManager.info("Click mo dashboard");
         userProfileForm.clickDashboardUserProfile();
         page.waitForTimeout(3000);
-     
+
         ExtentTestManager.info("Tim Room card có thu tu dau tien trong danh sach");
         bookingFlowPage.CheckRoomCard();
 
-        Assert.assertTrue(bookingFlowPage.isCheckRoomCard());
+        ExtentTestManager.info("Kiểm tra Room card hiển thị trong danh sách");
+        boolean isVisible = bookingFlowPage.isCheckRoomCard();
+        Assert.assertTrue(isVisible, "Card phòng không hiển thị trên giao diện!");
     }
 }

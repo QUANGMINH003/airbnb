@@ -107,12 +107,12 @@ public class BookingFlowPage extends BasePages {
 
     public boolean isCheckRoomCard() {
         try {
-            page.locator(Room_Card)
-                    .waitFor(new Locator.WaitForOptions()
-                            .setState(WaitForSelectorState.VISIBLE)
-                            .setTimeout(3000));
+            page.locator(Room_Card).first().waitFor(new Locator.WaitForOptions()
+                    .setState(WaitForSelectorState.VISIBLE)
+                    .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.err.println("Lỗi: Không tìm thấy Room Card sau thời gian chờ.");
             return false;
         }
     }
