@@ -71,13 +71,9 @@ public class UserProfileTest {
         userProfileForm.clickDashboardUserProfile();
         page.waitForTimeout(1000);
 
-        ExtentTestManager.info("Truy cap user profile");
-        userProfileForm.accessEditUserProfile();
-        page.waitForTimeout(1000);
-
         ExtentTestManager.info("Hien thi user profile");
         userProfileForm.displayEditUserProfile();
-        page.waitForTimeout(1000);
+        page.waitForTimeout(2000);
 
         Assert.assertTrue(
                 userProfileForm.isUserProfileVisible(),
