@@ -120,7 +120,7 @@ public class UserProfileTest {
     }
 
     @Test
-    public void tcUploadAvatar() {
+    public void tc_UploadAvatar() {
         // Folder ảnh thật trong máy bạn
         String imageFolder = "D:\\";
 
